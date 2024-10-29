@@ -1,20 +1,15 @@
-local debug = false
-function DebugPrint(...)
-    if debug then print("^0[^8DEBUG^0] ".. ...) end
-end
-
-Citizen.CreateThread(function() -- soft aim
+CreateThread(function()
     while true do 
         local ped = PlayerPedId()
         local weapon = GetSelectedPedWeapon(ped)
         SetPedConfigFlag(ped, 43, true) -- CPED_CONFIG_FLAG_DisablePlayerLockon
-        if weapon ~= `WEAPON_UNARMED` and weapon ~= 0 then -- check pokud ma zbran
+        if weapon ~= `WEAPON_UNARMED` and weapon ~= 0 then
             local lockOn = GetLockonDistanceOfCurrentPedWeapon(ped)
             DebugPrint(lockOn)
             if lockOn > 500.0 then 
                 DebugPrint(lockOn)
                 local player = PlayerId()
-                SetPlayerLockon(player, false) -- zastaví lock na osobu
+                SetPlayerLockon(player, false)
                 SetPlayerLockonRangeOverride(player, -1.0)
             end
         end
@@ -23,7 +18,7 @@ Citizen.CreateThread(function() -- soft aim
 end)
 
 
-Citizen.CreateThread(function() -- aim assist (controler), tohle jsem vzal z netu tbh
+CreateThread(function()
     while true do
         if NetworkGetTargetingMode() ~= 3 then
             SetPlayerTargetingMode(3)
