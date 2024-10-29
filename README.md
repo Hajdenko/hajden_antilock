@@ -1,2 +1,1 @@
-# hajden_antilock
-AntiLock script for controlers and pc softaim (only mod)
+I've found a cool antilock script that worked a bit so I've modified it to work better.
